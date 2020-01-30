@@ -199,7 +199,8 @@ html {
   box-sizing: inherit;
 }
 body {
-  color: hsla(0, 0%, 0%, 0.8);
+  color: #F5F9E9;
+  background: #454851;
   font-family: georgia, serif;
   font-weight: normal;
   word-wrap: break-word;
@@ -619,4 +620,8 @@ pre tt:after {
   html {
     font-size: 100%;
   }
+}
+
+a, a:active, a:visited {
+  color: #F5F9E9;
 }
