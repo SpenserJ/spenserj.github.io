@@ -16,7 +16,17 @@ const Header = ({ siteTitle }) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <span
+        style={{
+          margin: 0,
+          padding: 0,
+          fontFamily: '-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif',
+          fontWeight: 700,
+          textRendering: 'optimizeLegibility',
+          lineHeight: 1.1,
+          fontSize: '2.25rem',
+        }}
+      >
         <Link
           to="/"
           style={{
@@ -26,7 +36,7 @@ const Header = ({ siteTitle }) => (
         >
           {siteTitle}
         </Link>
-      </h1>
+      </span>
     </div>
   </header>
 )

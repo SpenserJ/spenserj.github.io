@@ -3,11 +3,11 @@ import { Link, graphql } from "gatsby"
 import dateFormat from 'dateformat';
 
 import Layout from "../components/Layout"
-import SEO from "../components/seo"
+import SEO from "../components/SEO"
 
 export default ({ data }) => (
   <Layout>
-    <SEO title="Home" />
+    <SEO title="Recent Posts" />
     <h1>Recent Posts</h1>
     {data.allMdx.nodes.map((post) => (
       <React.Fragment key={post.id}>

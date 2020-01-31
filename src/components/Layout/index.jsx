@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
       <Header siteTitle={data.site.siteMetadata.title} />
       <div style={{ display: 'flex' }}>
         <Sidebar />
-        <main>{children}</main>
+        <main style={{ flex: 1 }}>{children}</main>
       </div>
       <footer>
         © {new Date().getFullYear()} Spenser Jones

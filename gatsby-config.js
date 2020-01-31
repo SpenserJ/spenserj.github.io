@@ -1,8 +1,9 @@
 module.exports = {
   siteMetadata: {
     title: `Spenser Jones`,
-    description: `Spenser Jones is a software developer based in Calgary, AB. He likes to focus on architecture and development processes to help his teams work smarter, not harder.`,
+    description: `Spenser Jones is a software developer based in Calgary, AB that focuses on architecture and development processes to help his teams work smarter, not harder.`,
     author: `@spenserj`,
+    siteUrl: 'https://spenserj.com',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -39,6 +40,14 @@ module.exports = {
       options: {
         path: `${__dirname}/posts`,
         name: 'posts',
+      },
+    },
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-robots-txt',
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-35594055-2',
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

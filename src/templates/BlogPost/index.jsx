@@ -3,7 +3,7 @@ import { MDXRenderer } from 'gatsby-plugin-mdx';
 import React from 'react';
 import dateFormat from 'dateformat';
 
-import SEO from "../../components/seo"
+import SEO from "../../components/SEO"
 import Layout from '../../components/Layout';
 
 export default ({ data }) => {
