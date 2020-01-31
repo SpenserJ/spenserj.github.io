@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://spenserj.com/sitemap.xml
+Host: https://spenserj.com
