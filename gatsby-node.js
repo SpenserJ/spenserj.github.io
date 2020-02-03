@@ -26,11 +26,10 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   }
 };
 
-exports.createPages = ({ actions, graphql }) => {
+exports.createPages = async ({ actions, graphql }) => {
   const { createPage } = actions;
-  const blogPostTemplate = path.resolve('src/templates/BlogPost/index.jsx');
 
-  return graphql(`
+  const blogPosts = await graphql(`
     {
       allMdx(
         filter: { frontmatter: { published: { eq: true } } }
@@ -41,15 +40,29 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then(result => {
-    if (result.errors) { throw result.errors; }
-    const posts = result.data.allMdx.nodes;
-    posts.forEach(post => {
-      createPage({
-        path: post.fields.slug,
-        component: blogPostTemplate,
-        context: { slug: post.fields.slug },
-      });
+  `);
+  if (blogPosts.errors) { throw blogPosts.errors; }
+
+  blogPosts.data.allMdx.nodes.forEach(post => {
+    createPage({
+      path: post.fields.slug,
+      component: path.resolve('src/templates/BlogPost/index.jsx'),
+      context: { slug: post.fields.slug },
     });
   });
+
+  const postsPerPage = 10;
+  const numPages = Math.ceil(blogPosts.data.allMdx.nodes.length / postsPerPage);
+  for (let i = 0; i < numPages; i += 1) {
+    createPage({
+      path: i === 0 ? '/' : `/blog/${i + 1}`,
+      component: path.resolve('./src/templates/BlogList/index.jsx'),
+      context: {
+        limit: postsPerPage,
+        skip: i * postsPerPage,
+        numPages,
+        currentPage: i + 1,
+      },
+    });
+  }
 };
