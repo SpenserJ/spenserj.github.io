@@ -1,0 +1,198 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><style data-href="/styles.1a44142db5d9bd209f37.css">@import url(https://fonts.googleapis.com/css?family=Roboto&display=swap);
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */html{line-height:1.15;-webkit-text-size-adjust:100%}body{margin:0}main{display:block}h1{font-size:2em;margin:.67em 0}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}b,strong{font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}img{border-style:none}button,input,optgroup,select,textarea{font-family:inherit;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{padding:.35em .75em .625em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details{display:block}summary{display:list-item}[hidden],template{display:none}body{font-family:Roboto,sans-serif;background:#454851}a,a:active,a:visited,body{color:#f5f9e9}.layout{margin:0 auto;max-width:960px;padding:0 1.0875rem 1.45rem}.layout>.mainContent{display:flex}.layout>.mainContent>main{flex:1 1}@media only screen and (max-width:720px){.layout>header{text-align:center}.layout>.mainContent{display:block}.layout>.mainContent>main{margin-top:1em}}</style><meta name="generator" content="Gatsby 2.19.7"/><title data-react-helmet="true">Securing a Linux Server | Spenser Jones</title><meta data-react-helmet="true" name="description" content="Spenser Jones is a software developer based in Calgary, AB that focuses on architecture and development processes to help his teams work smarter, not harder."/><meta data-react-helmet="true" property="og:title" content="Securing a Linux Server"/><meta data-react-helmet="true" property="og:description" content="Spenser Jones is a software developer based in Calgary, AB that focuses on architecture and development processes to help his teams work smarter, not harder."/><meta data-react-helmet="true" property="og:type" content="website"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:creator" content="@spenserj"/><meta data-react-helmet="true" name="twitter:title" content="Securing a Linux Server"/><meta data-react-helmet="true" name="twitter:description" content="Spenser Jones is a software developer based in Calgary, AB that focuses on architecture and development processes to help his teams work smarter, not harder."/><script data-react-helmet="true" type="application/ld+json">{"@context":"http://schema.org","@type":"Person","name":"Spenser Jones","url":"https://spenserj.com","sameAs":["https://twitter.com/spenserj","https://keybase.io/spenserj","https://github.com/SpenserJ","https://www.instagram.com/spenserj/"]}</script><link rel="icon" href="/icons/icon-48x48.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="manifest" href="/manifest.webmanifest"/><meta name="theme-color" content="#454851"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=edf3d310d67f8284a562bc3a58c3e761"/><link rel="sitemap" type="application/xml" href="/sitemap.xml"/><link rel="preconnect dns-prefetch" href="https://www.google-analytics.com"/><link as="script" rel="preload" href="/webpack-runtime-454420b4abb72ed975ae.js"/><link as="script" rel="preload" href="/app-7c87497f8d221155d81b.js"/><link as="script" rel="preload" href="/styles-85731806c65c722a5ffc.js"/><link as="script" rel="preload" href="/commons-6131aca021ce59d3a7d8.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-index-jsx-c17d830c0c61ea76885f.js"/><link as="fetch" rel="preload" href="/page-data/posts/2013-07-15-securing-a-linux-server/page-data.json" crossorigin="anonymous"/></head><body><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="layout"><header style="background:#454851;margin-bottom:1.45rem"><div style="margin:0 auto;max-width:960px;padding:1.45rem 1.0875rem"><span style="margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;font-weight:700;text-rendering:optimizeLegibility;line-height:1.1;font-size:2.25rem"><a style="color:#F5F9E9;text-decoration:none" href="/">Spenser Jones</a></span></div></header><div class="mainContent"><nav style="width:200px"><a href="/">Home</a></nav><main><h1>Securing a Linux Server</h1><time datetime="2013-07-15">Monday, July 15th, 2013</time><p>It is a rarity to watch someone secure a freshly installed server right off the bat, yet the world we live in makes this a necessity. So why do so many people put it off until the end, if at all? I&#x27;ve done the exact same thing, and it often comes down to wanting to get right into the fun stuff. Hopefully this post will show that it is far easier than you think to secure a server, and can be quite entertaining to look down from your fortress, when the attacks begin to flow.</p><p>This post is written for Ubuntu 12.04.2 LTS, however you can do similar things on any other Linux distribution.</p><h2>Where do I begin?</h2><p>If this server already has a public IP, you&#x27;ll want to lock down root access immediately. In fact, you&#x27;ll want to lock down SSH access entirely, and make sure that only <em>you</em> can get in. Add a new user, and add it to an admin group (preconfigured in <code>/etc/sudoers</code> to have access to <code>sudo</code>).</p><pre><code class="language-plain">$ sudo addgroup admin
+Adding group &#x27;admin&#x27; (GID 1001)
+Done.
+
+$ sudo adduser spenserj
+Adding user `spenserj&#x27; ...
+Adding new group `spenserj&#x27; (1002) ...
+Adding new user `spenserj&#x27; (1001) with group `spenserj&#x27; ...
+Creating home directory `/home/spenserj&#x27; ...
+Copying files from `/etc/skel&#x27; ...
+Enter new UNIX password:
+Retype new UNIX password:
+passwd: password updated successfully
+Changing the user information for spenserj
+Enter the new value, or press ENTER for the default
+    Full Name []: Spenser Jones
+    Room Number []:
+    Work Phone []:
+    Home Phone []:
+    Other []:
+Is the information correct? [Y/n] y
+
+$ sudo usermod -a -G admin spenserj
+</code></pre><p>You’ll also want to create a private key on your computer, and disable that pesky password authentication on the server.</p><pre><code class="language-plain">$ mkdir ~/.ssh
+$ echo &quot;ssh-rsa [your public key]&quot; &gt; ~/.ssh/authorized_keys
+</code></pre><pre><code class="language-plain" metastring="/etc/ssh/sshd_config">PermitRootLogin no
+PermitEmptyPasswords no
+PasswordAuthentication no
+AllowUsers spenserj
+</code></pre><p>Reload SSH to apply the changes, and then try logging in <strong>in a new session</strong> to ensure everything worked. If you can&#x27;t log in, you&#x27;ll still have your original session to fix things up.</p><pre><code class="language-plain">$ sudo service ssh restart
+ssh stop/waiting
+ssh start/running, process 1599
+</code></pre><h2>Update the server</h2><p>Now that you&#x27;re the only one with access to the server, you can stop worrying about a hacker sneaking in, and breathe normally again. Chances are good that there are some updates for your server, so go ahead and run those now.</p><pre><code class="language-plain">$ sudo apt-get update
+...
+Hit http://ca.archive.ubuntu.com precise-updates/universe Translation-en_CA
+Hit http://ca.archive.ubuntu.com precise-updates/universe Translation-en
+Hit http://ca.archive.ubuntu.com precise-backports/main Translation-en
+Hit http://ca.archive.ubuntu.com precise-backports/multiverse Translation-en
+Hit http://ca.archive.ubuntu.com precise-backports/restricted Translation-en
+Hit http://ca.archive.ubuntu.com precise-backports/universe Translation-en
+Fetched 3,285 kB in 5s (573 kB/s)
+Reading package lists... Done
+
+$ sudo apt-get upgrade
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following packages have been kept back:
+  linux-headers-generic-lts-quantal linux-image-generic-lts-quantal
+The following packages will be upgraded:
+  accountsservice apport apt apt-transport-https apt-utils aptitude bash ...
+73 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Need to get 61.0 MB of archives.
+After this operation, 151 kB of additional disk space will be used.
+Do you want to continue [Y/n]? Y
+...
+Setting up libisc83 (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up libdns81 (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up libisccc80 (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up libisccfg82 (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up libbind9-80 (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up liblwres80 (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up bind9-host (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up dnsutils (1:9.8.1.dfsg.P1-4ubuntu0.6) ...
+Setting up iptables (1.4.12-1ubuntu5) ...
+...
+</code></pre><h2>Install a Firewall</h2><p>Running the most recent software now? Good. Go ahead and set up a firewall, and <em>only</em> allow what you need right at this moment. You can always add another exception later, and a few minutes of extra work won&#x27;t kill you. IPTables comes preinstalled in Ubuntu, so go ahead and set up some rules for it.</p><pre><code class="language-plain">$ sudo mkdir /etc/iptables
+</code></pre><pre><code class="language-plain" metastring="/etc/iptables/rules">*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+# Accept any related or established connections
+-I INPUT  1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+-I OUTPUT 1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+# Allow all traffic on the loopback interface
+-A INPUT  -i lo -j ACCEPT
+-A OUTPUT -o lo -j ACCEPT
+
+# Allow outbound DHCP request - Some hosts (Linode) automatically assign the primary IP
+#-A OUTPUT -p udp --dport 67:68 --sport 67:68 -j ACCEPT
+
+# Outbound DNS lookups
+-A OUTPUT -o eth0 -p udp -m udp --dport 53 -j ACCEPT
+
+# Outbound PING requests
+-A OUTPUT -p icmp -j ACCEPT
+
+# Outbound Network Time Protocol (NTP) request
+-A OUTPUT -p udp --dport 123 --sport 123 -j ACCEPT
+
+# SSH
+-A INPUT  -i eth0 -p tcp -m tcp --dport 22 -m state --state NEW -j ACCEPT
+
+# Outbound HTTP
+-A OUTPUT -o eth0 -p tcp -m tcp --dport 80 -m state --state NEW -j ACCEPT
+-A OUTPUT -o eth0 -p tcp -m tcp --dport 443 -m state --state NEW -j ACCEPT
+
+COMMIT
+</code></pre><p>Apply the ruleset with a timeout through <code>iptables-apply</code>, and if you lose the connection, fix your rules and try again before continuing.</p><pre><code class="language-plain">$ sudo iptables-apply /etc/iptables/rules
+Applying new ruleset... done.
+Can you establish NEW connections to the machine? (y/N) y
+... then my job is done. See you next time.
+</code></pre><p>Create the file <code>/etc/network/if-pre-up.d/iptables</code>, with the following content. This will automatically load your IPTables rules when you start the server.</p><pre><code class="language-plain" metastring="/etc/network/if-pre-up.d/iptables">#!/bin/sh
+iptables-restore &lt; /etc/iptables/rules
+</code></pre><p>Now give it execute permissions, and execute the file to ensure it loads properly.</p><pre><code class="language-plain">$ sudo chmod +x /etc/network/if-pre-up.d/iptables
+$ sudo /etc/network/if-pre-up.d/iptables
+</code></pre><h2>Fail2ban those wannabe-hackers</h2><p>Fail2ban is one of my favourite tools when it comes to security, as it will monitor your logfiles, and temporarily ban users that are misusing your resources, be it brute forcing your SSH connection, or DoSing your webserver.</p><pre><code class="language-plain" metastring="Install Fail2ban">$ sudo apt-get install fail2ban
+[sudo] password for sjones:
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following extra packages will be installed:
+  gamin libgamin0 python-central python-gamin python-support whois
+Suggested packages:
+  mailx
+The following NEW packages will be installed:
+  fail2ban gamin libgamin0 python-central python-gamin python-support whois
+0 upgraded, 7 newly installed, 0 to remove and 2 not upgraded.
+Need to get 254 kB of archives.
+After this operation, 1,381 kB of additional disk space will be used.
+Do you want to continue [Y/n]? y
+...
+</code></pre><p>Fail2ban installs a default configuration (<code>/etc/fail2ban/jail.conf</code>), but we&#x27;ll want to make our changes in <code>/etc/fail2ban/jail.local</code>, so copy it there.</p><pre><code class="language-plain">sudo cp /etc/fail2ban/jail.{conf,local}
+</code></pre><h3>Configuration</h3><p>Change the <code>ignoreip</code> line to your IP, and decide on an amount of time to ban the scumbags for (default is 10 minutes). You&#x27;ll also want to set up a <code>destemail</code>, which I normally enter as my own email address followed by <code>,fail2ban@blocklist.de</code>. <a href="http://www.blocklist.de/">BlockList.de</a> is a system to track and automatically report hacking attempts to the proper abuse contact for their IP.</p><pre><code class="language-plain" metastring="/etc/fail2ban/jail.local">[DEFAULT]
+
+# &quot;ignoreip&quot; can be an IP address, a CIDR mask or a DNS host
+ignoreip = 127.0.0.1/8
+bantime  = 600
+maxretry = 3
+
+# &quot;backend&quot; specifies the backend used to get files modification. Available
+# options are &quot;gamin&quot;, &quot;polling&quot; and &quot;auto&quot;.
+# yoh: For some reason Debian shipped python-gamin didn&#x27;t work as expected
+#      This issue left ToDo, so polling is default backend for now
+backend = auto
+
+#
+# Destination email address used solely for the interpolations in
+# jail.{conf,local} configuration files.
+destemail = root@localhost,fail2ban@blocklist.de
+</code></pre><p>There are a few other settings you&#x27;ll want to check out, although the defaults are quite sufficient, so skim through the file quickly until you reach the Actions section.</p><h3>Actions</h3><p>Actions allow you to react to malicious activity, however the default is to issue an IPTables ban, while we want it to ban <em>and</em> send an email. Thankfully there is a preconfigured <code>action_wml</code>, which does just that.</p><pre><code class="language-plain" metastring="/etc/fail2ban/jail.local"># Choose default action.  To change, just override value of &#x27;action&#x27; with the
+# interpolation to the chosen action shortcut (e.g.  action_mw, action_mwl, etc) in jail.local
+# globally (section [DEFAULT]) or per specific section
+action = %(action_mwl)s
+</code></pre><h3>Jails</h3><p>In order for Fail2ban to work, it needs to know what to watch. These are configured in the Jails section of the config, and there are quite a few examples pre-loaded and disabled. Since you&#x27;ve only enabled SSH access on the server so far, we&#x27;ll only enable the SSH and SSH-DDoS jails, however you&#x27;ll want to add a new jail for each publicly-accessible service that you install on this server.</p><pre><code class="language-plain" metastring="/etc/fail2ban/jail.local">[ssh]
+
+enabled  = true
+port     = ssh
+filter   = sshd
+logpath  = /var/log/auth.log
+maxretry = 6
+
+[ssh-ddos]
+
+enabled  = true
+port     = ssh
+filter   = sshd-ddos
+logpath  = /var/log/auth.log
+maxretry = 6
+</code></pre><h3>Apply the changes</h3><p>Now that we&#x27;ve configured Fail2ban, you&#x27;ll want to reload it, and confirm that it is adding the appropriate rules to IPTables.</p><pre><code class="language-plain">$ sudo service fail2ban restart
+ * Restarting authentication failure monitor fail2ban
+   ...done.
+
+$ sudo iptables -L
+Chain INPUT (policy DROP)
+target     prot opt source               destination
+fail2ban-ssh-ddos  tcp  --  anywhere             anywhere             multiport dports ssh
+fail2ban-ssh  tcp  --  anywhere             anywhere             multiport dports ssh
+...
+Chain fail2ban-ssh (1 references)
+target     prot opt source               destination
+RETURN     all  --  anywhere             anywhere
+
+Chain fail2ban-ssh-ddos (1 references)
+target     prot opt source               destination
+RETURN     all  --  anywhere             anywhere
+</code></pre><p>At any time, you can use <code>sudo iptables -L</code> to list your rules, and subsequently list any currently-banned IPs. At the moment, Fail2ban is handling two malicious individuals:</p><pre><code class="language-plain" metastring="Banned IPs">DROP       all  --  204.50.33.22         anywhere
+DROP       all  --  195.128.126.114      anywhere
+</code></pre><h2>Staying on top of things</h2><p>You should now have a server that is locked down and ready to use, however this is not the end of your security journey. Stay on top of updates (and always test them in a non-production environment first), always close ports that you don&#x27;t need, check your logs regularly, and know your servers inside-and-out.</p><h2>HackerNews Followup</h2><p>There are some great comments over at <a href="https://news.ycombinator.com/item?id=6384603">HackerNews</a>, and I suggest you read through them if you&#x27;re interested in different perspectives and higher security. This post is intended as a beginners guide to security, and the end of this post does not mean your server is invulnerable. Use this to quickly lock down a new server, and then build upon it for your unique situation. You may want to look into IPV6 security, changing your SSH port (security through obscurity), secured kernels (SELinux and GRSecurity), tracking system changes, and full audits if your server has ever been unsecured, or has been online for any substantial length of time. There are hundreds of entry points into a server, and every application you install brings yet another possible hole, but with the proper tools, you can go to bed without worries.</p></main></div><footer>© <!-- -->2020<!-- --> Spenser Jones</footer></div></div></div><script>
+  
+  
+  if(true) {
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  }
+  if (typeof ga === "function") {
+    ga('create', 'UA-35594055-2', 'auto', {});
+      
+      
+      
+      
+      
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/2013-07-15-securing-a-linux-server";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-7c87497f8d221155d81b.js"],"component---src-templates-blog-post-index-jsx":["/component---src-templates-blog-post-index-jsx-c17d830c0c61ea76885f.js"],"component---src-templates-blog-list-index-jsx":["/component---src-templates-blog-list-index-jsx-fd62d925d91b9020477c.js"],"component---src-pages-404-js":["/component---src-pages-404-js-c0e6cedb2486dc15ad91.js"]};/*]]>*/</script><script src="/component---src-templates-blog-post-index-jsx-c17d830c0c61ea76885f.js" async=""></script><script src="/commons-6131aca021ce59d3a7d8.js" async=""></script><script src="/styles-85731806c65c722a5ffc.js" async=""></script><script src="/app-7c87497f8d221155d81b.js" async=""></script><script src="/webpack-runtime-454420b4abb72ed975ae.js" async=""></script></body></html>
