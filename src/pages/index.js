@@ -15,7 +15,7 @@ export default ({ data }) => (
           <h2>{post.frontmatter.title}</h2>
         </Link>
         <time
-          datetime={dateFormat(post.frontmatter.date, 'yyyy-mm-dd')}
+          dateTime={dateFormat(post.frontmatter.date, 'yyyy-mm-dd')}
         >
           {dateFormat(post.frontmatter.date, 'dddd, mmmm dS, yyyy')}
         </time>
