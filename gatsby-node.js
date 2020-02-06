@@ -6,24 +6,45 @@
 
 const path = require('path');
 const dateFormat = require('dateformat');
-const { createFilePath } = require('gatsby-source-filesystem');
+const { attachFields } = require(`gatsby-plugin-node-fields`)
+
+const descriptors = [
+  {
+    predicate: node => (node.internal.type === 'Mdx'),
+    fields: [
+      {
+        name: 'author',
+        getter: node => node.frontmatter.author,
+        defaultValue: 'Spenser Jones',
+      },
+      {
+        name: 'date',
+        getter: node => node.frontmatter.date,
+      },
+      {
+        name: 'lastModified',
+        getter: node => node.frontmatter.lastModified,
+        defaultValue: node => node.frontmatter.date,
+      },
+      {
+        name: 'slug',
+        getter: node => {
+          const { date: rawDate, title, slug: rawSlug } = node.frontmatter;
+          const date = new Date(rawDate);
+          const dateSlug = date
+            ? dateFormat(date, 'yyyy-mm-dd')
+            : '0000-00-00';
+          const titleSlug = rawSlug
+            || title.toLowerCase().replace(/[^a-z0-9\-]+/g, '-');
+          return `/posts/${dateSlug}-${titleSlug}/`;
+        },
+      },
+    ],
+  }
+];
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions;
-  if (node.internal.type === 'Mdx') {
-    const { date: rawDate, title, slug: rawSlug } = node.frontmatter;
-    const date = new Date(rawDate);
-    const dateSlug = date
-      ? dateFormat(date, 'yyyy-mm-dd')
-      : '0000-00-00';
-    const titleSlug = rawSlug
-      || title.toLowerCase().replace(/[^a-z0-9\-]+/g, '-');
-    createNodeField({
-      name: 'slug',
-      node,
-      value: `/posts/${dateSlug}-${titleSlug}`,
-    });
-  }
+  attachFields(node, actions, getNode, descriptors);
 };
 
 exports.createPages = async ({ actions, graphql }) => {
