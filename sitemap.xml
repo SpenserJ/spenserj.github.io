@@ -8,5 +8,6 @@
 <url> <loc>https://spenserj.com/posts/2020-01-31-new-muhstik-botnet-attacks-target-tomato-routers</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://spenserj.com/posts/2020-01-31-the-nist-publishes-a-new-privacy-framework</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://spenserj.com/posts/2013-07-15-securing-a-linux-server</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://spenserj.com/posts/2020-02-06-sudo-bug-lets-non-privileged-users-run-as-root-if-pwfeedback-is-enabled</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://spenserj.com/</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 </urlset>
